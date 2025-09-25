@@ -12,7 +12,7 @@ const translations: Record<string, { tagline: string; sub: string; actions: stri
     actions: ["Submit Complaint", "Track Status", "Emergency Help", "Volunteer Signup"],
   },
   hi: {
-    tagline: "नागरिकों को जोड़ना, शासन बदलना",
+    tagline: "नागरिकों को जो���़ना, शासन बदलना",
     sub: "समस्याएँ दर्ज करें, प्रगति देखें और शहर के साथ मिलकर काम करें।",
     actions: ["शिकायत दर्ज करें", "स्थिति ट्रैक करें", "आपातकालीन सहायता", "स्वयंसेवी जुड़ें"],
   },
@@ -32,9 +32,9 @@ const translations: Record<string, { tagline: string; sub: string; actions: stri
     actions: ["অভিযোগ জমা দিন", "স্ট্যাটাস ট্র্যাক করুন", "জরুরি সহায়তা", "স্বেচ্ছাসেবক নিবন্ধন"],
   },
   mr: {
-    tagline: "नागरिकांना जो��णे, शासन बदलणे",
+    tagline: "नागरिकांना जोडणे, शासन बदलणे",
     sub: "समस्या नोंदवा, प्रगती ट्रॅक करा आणि आपल्या शहरासोबत सहकार्य करा.",
-    actions: ["तक्रार नोंदवा", "स्थिती ट्रॅक करा", "आपत्कालीन मदत", "स्वयंसेवक नोंदणी"],
+    actions: ["तक्रार नोंदवा", "स्थिती ट्रॅक करा", "आपत्कालीन मदत", "स्वयंसेव�� नोंदणी"],
   },
   kn: {
     tagline: "ನಾಗರಿಕರನ್ನು ಸಂಪರ್ಕಿಸಿ, ಆಡಳಿತ ಪರಿವರ್ತನೆ",
@@ -164,7 +164,9 @@ export default function Index() {
       <section className="container py-12 grid sm:grid-cols-3 gap-6">
         <EngageCard icon={MessageSquare} title="Chatbot & IVR" desc="Ask questions or submit complaints with guided steps." color="from-navy to-indigo-600" />
         <EngageCard icon={ShieldCheck} title="Real-time Tracking" desc="Stay updated with status changes and SLA timers." color="from-emerald-600 to-indiaGreen" />
-        <EngageCard icon={Users} title="Volunteer & Help Desk" desc="Join city drives and schedule mobile help desk." color="from-orange-400 to-saffron" />
+        {role !== "admin" && (
+          <EngageCard icon={Users} title="Volunteer & Help Desk" desc="Join city drives and schedule mobile help desk." color="from-orange-400 to-saffron" />
+        )}
       </section>
 
       {/* Emergency floating action */}
