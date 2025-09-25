@@ -1,12 +1,26 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Activity, BarChart3, CheckCircle2, Clock, Gauge, PieChart as PieIcon, Users } from "lucide-react";
+import { Activity, BarChart3, CheckCircle2, Clock, Gauge, PieChart as PieIcon } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, BarChart, Bar, CartesianGrid, Legend } from "recharts";
+import { getRole, getRegion } from "@/lib/auth";
 
-const COLORS = ["#FF9933", "#138808", "#000080", "#66b3ff", "#ffd166", "#ef476f"]; 
+const COLORS = ["#FF9933", "#138808", "#000080", "#66b3ff", "#ffd166", "#ef476f"];
 
 export default function Dashboard() {
-  const [role, setRole] = useState<"citizen" | "officer" | "admin">("admin");
+  const [role, setRole] = useState<"citizen" | "officer" | "admin">(() => getRole());
+  const [region, setRegion] = useState<string>(() => getRegion());
+
+  // sync with role/region changes from quick login
+  useEffect(() => {
+    const onRole = (e: any) => setRole(e.detail || getRole());
+    const onRegion = (e: any) => setRegion(e.detail || getRegion());
+    window.addEventListener("role-change", onRole as any);
+    window.addEventListener("region-change", onRegion as any);
+    return () => {
+      window.removeEventListener("role-change", onRole as any);
+      window.removeEventListener("region-change", onRegion as any);
+    };
+  }, []);
 
   const stats = useMemo(() => (
     role === "citizen"
@@ -49,11 +63,7 @@ export default function Dashboard() {
     <div className="container py-8 space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl md:text-3xl font-bold" style={{ color: "hsl(var(--navy))" }}>Dashboard</h1>
-        <div className="flex gap-2">
-          <Button variant={role === "citizen" ? "default" : "outline"} onClick={() => setRole("citizen")}>Citizen</Button>
-          <Button variant={role === "officer" ? "default" : "outline"} onClick={() => setRole("officer")}>Officer</Button>
-          <Button variant={role === "admin" ? "default" : "outline"} onClick={() => setRole("admin")}>Admin</Button>
-        </div>
+        <div className="text-sm text-muted-foreground">Role: <span className="font-medium capitalize">{role}</span>{region ? ` • ${region}` : ""}</div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
