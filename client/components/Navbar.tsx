@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Globe, Menu, UserCircle2 } from "lucide-react";
+import { getRole } from "@/lib/auth";
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -18,6 +19,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [lang, setLang] = useState<string>(() => localStorage.getItem("lang") || "en");
+  const [role, setRole] = useState<"citizen" | "officer" | "admin">(() => getRole());
   const isAuthed = !!localStorage.getItem("jwt");
 
   useEffect(() => {
@@ -25,7 +27,23 @@ export default function Navbar() {
     window.dispatchEvent(new CustomEvent("lang-change", { detail: lang }));
   }, [lang]);
 
+  useEffect(() => {
+    const onRole = (e: any) => setRole(e.detail || getRole());
+    window.addEventListener("role-change", onRole as any);
+    return () => window.removeEventListener("role-change", onRole as any);
+  }, []);
+
   const t = useMemo(() => getTranslations(lang), [lang]);
+
+  const links = [
+    { to: "/", label: t.nav.home },
+    { to: "/dashboard", label: t.nav.dashboard },
+    { to: "/complaints", label: t.nav.complaints },
+    { to: "/map", label: t.nav.map },
+    ...(role === "admin" ? [] : [{ to: "/volunteers", label: t.nav.volunteers }]),
+    { to: "/emergency", label: t.nav.emergency },
+    { to: "/feedback", label: t.nav.feedback },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -44,15 +62,7 @@ export default function Navbar() {
           </div>
         </div>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          {[
-            { to: "/", label: t.nav.home },
-            { to: "/dashboard", label: t.nav.dashboard },
-            { to: "/complaints", label: t.nav.complaints },
-            { to: "/map", label: t.nav.map },
-            { to: "/volunteers", label: t.nav.volunteers },
-            { to: "/emergency", label: t.nav.emergency },
-            { to: "/feedback", label: t.nav.feedback },
-          ].map((link) => (
+          {links.map((link) => (
             <NavLink key={link.to} to={link.to} className={({ isActive }) => `hover:text-primary ${isActive ? "text-primary" : "text-foreground"}`}>
               {link.label}
             </NavLink>
@@ -91,13 +101,9 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t bg-background">
           <div className="container py-2 grid grid-cols-2 gap-2 text-sm">
-            <NavLink to="/" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{t.nav.home}</NavLink>
-            <NavLink to="/dashboard" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{t.nav.dashboard}</NavLink>
-            <NavLink to="/complaints" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{t.nav.complaints}</NavLink>
-            <NavLink to="/map" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{t.nav.map}</NavLink>
-            <NavLink to="/volunteers" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{t.nav.volunteers}</NavLink>
-            <NavLink to="/emergency" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{t.nav.emergency}</NavLink>
-            <NavLink to="/feedback" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{t.nav.feedback}</NavLink>
+            {links.map((l) => (
+              <NavLink key={l.to} to={l.to} onClick={() => setOpen(false)} className="p-2 rounded hover:bg-muted">{l.label}</NavLink>
+            ))}
           </div>
         </div>
       )}
@@ -108,7 +114,7 @@ export default function Navbar() {
 function getTranslations(code: string) {
   switch (code) {
     case "hi":
-      return { nav: { home: "होम", dashboard: "डैशबोर्ड", complaints: "शिकायतें", map: "मानचित्र", volunteers: "स्वयंसेवक", emergency: "आपातकाल", feedback: "प्रतिपुष्टि" } };
+      return { nav: { home: "होम", dashboard: "डैशबोर्ड", complaints: "शिक���यतें", map: "मानचित्र", volunteers: "स्वयंसेवक", emergency: "आपातकाल", feedback: "प्रतिपुष्टि" } };
     case "ta":
       return { nav: { home: "முகப்பு", dashboard: "டாஷ்போர்டு", complaints: "புகார்கள்", map: "வரைபடம்", volunteers: "தன்னார்வலர்கள்", emergency: "அவசரம்", feedback: "கருத்து" } };
     case "te":
