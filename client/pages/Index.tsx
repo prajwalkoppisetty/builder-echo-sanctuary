@@ -32,7 +32,7 @@ const translations: Record<string, { tagline: string; sub: string; actions: stri
     actions: ["অভিযোগ জমা দিন", "স্ট্যাটাস ট্র্যাক করুন", "জরুরি সহায়তা", "স্বেচ্ছাসেবক নিবন্ধন"],
   },
   mr: {
-    tagline: "नागरिकांना जोडणे, शासन बदलणे",
+    tagline: "नागरिकांना जोडणे, शासन बदलण��",
     sub: "समस्या नोंदवा, प्रगती ट्रॅक करा आणि आपल्या शहरासोबत सहकार्य करा.",
     actions: ["तक्रार नोंदवा", "स्थिती ट्रॅक करा", "आपत्कालीन मदत", "स्वयंसेवक नोंदणी"],
   },
@@ -46,6 +46,7 @@ const translations: Record<string, { tagline: string; sub: string; actions: stri
 export default function Index() {
   const [exampleFromServer, setExampleFromServer] = useState("");
   const [lang, setLang] = useState<string>(() => localStorage.getItem("lang") || "en");
+  const [role, setRole] = useState<"citizen" | "officer" | "admin">(() => getRole());
 
   useEffect(() => {
     const onChange = (e: any) => setLang(e.detail || localStorage.getItem("lang") || "en");
