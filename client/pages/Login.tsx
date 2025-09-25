@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { fakeLogin, fakeSignup, sendOtp, verifyOtp } from "@/lib/auth";
+import { fakeLogin, fakeSignup, sendOtp, verifyOtp, setRole, setRegion } from "@/lib/auth";
 import { ShieldCheck, Mail, Phone, LockKeyhole } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
