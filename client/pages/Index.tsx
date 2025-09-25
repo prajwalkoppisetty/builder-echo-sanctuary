@@ -3,6 +3,7 @@ import { Megaphone, MapPin, Siren, Users, ShieldCheck, MessageSquare, PhoneCall 
 import { DemoResponse } from "@shared/api";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { getRole } from "@/lib/auth";
 
 const translations: Record<string, { tagline: string; sub: string; actions: string[] }> = {
   en: {
