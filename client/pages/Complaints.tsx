@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Camera, FileVideo, MapPin, Navigation, Send, UploadCloud } from "lucide-react";
+import { Camera, FileVideo, MapPin, Navigation, Search, Send, UploadCloud } from "lucide-react";
 import { getRole } from "@/lib/auth";
 
 const demoComplaints = [
@@ -19,6 +19,12 @@ export default function Complaints() {
   const [media, setMedia] = useState<File | null>(null);
   const [coords, setCoords] = useState<string>("");
 
+  useEffect(() => {
+    const onRole = (e: any) => setRole(e.detail || getRole());
+    window.addEventListener("role-change", onRole as any);
+    return () => window.removeEventListener("role-change", onRole as any);
+  }, []);
+
   function next() { setStep((s) => Math.min(3, s + 1)); }
   function prev() { setStep((s) => Math.max(1, s - 1)); }
 
@@ -34,6 +40,60 @@ export default function Complaints() {
   function submit() {
     toast.success("Complaint submitted (demo)");
     setStep(1); setCategory("Roads"); setDescription(""); setMedia(null); setCoords("");
+  }
+
+  if (role === "admin") {
+    return (
+      <div className="container py-8 space-y-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h1 className="text-2xl md:text-3xl font-bold" style={{ color: "hsl(var(--navy))" }}>Posted Complaints</h1>
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              <input placeholder="Search ID, title, ward" className="pl-8 pr-3 py-2 rounded-md border bg-background text-sm" />
+            </div>
+            <select className="rounded-md border bg-background px-3 py-2 text-sm">
+              {["All Status","Open","Assigned","In Progress","Resolved"].map(o=> <option key={o}>{o}</option>)}
+            </select>
+            <select className="rounded-md border bg-background px-3 py-2 text-sm">
+              {["All Categories","Roads","Water","Electricity","Waste"].map(o=> <option key={o}>{o}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto rounded-2xl border bg-card shadow-sm">
+          <table className="min-w-full text-sm">
+            <thead className="bg-muted/50">
+              <tr className="text-left">
+                <th className="px-4 py-3">ID</th>
+                <th className="px-4 py-3">Title</th>
+                <th className="px-4 py-3">Category</th>
+                <th className="px-4 py-3">Ward</th>
+                <th className="px-4 py-3">Submitted By</th>
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">SLA (hrs)</th>
+                <th className="px-4 py-3">Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              {demoComplaints.map((c) => (
+                <tr key={c.id} className="border-t">
+                  <td className="px-4 py-3 font-mono text-xs">{c.id}</td>
+                  <td className="px-4 py-3">{c.title}</td>
+                  <td className="px-4 py-3">{c.category}</td>
+                  <td className="px-4 py-3">{c.ward}</td>
+                  <td className="px-4 py-3">{c.submittedBy}</td>
+                  <td className="px-4 py-3">{c.status}</td>
+                  <td className="px-4 py-3">{c.slaHrs}</td>
+                  <td className="px-4 py-3">{c.createdAt}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-xs text-muted-foreground">Admins can view/triage complaints here. Submission is disabled for admins.</p>
+      </div>
+    );
   }
 
   return (
