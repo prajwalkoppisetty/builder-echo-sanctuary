@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Globe, Menu, UserCircle2 } from "lucide-react";
-import { getRole } from "@/lib/auth";
+import { getRole, fakeLogout } from "@/lib/auth";
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -87,9 +87,12 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
           {isAuthed ? (
-            <Button variant="secondary" size="sm" onClick={() => navigate("/dashboard")}>
-              <UserCircle2 className="mr-2 h-4 w-4" /> Profile
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button variant="secondary" size="sm" onClick={() => navigate("/dashboard")}>
+                <UserCircle2 className="mr-2 h-4 w-4" /> Profile
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => { fakeLogout(); navigate("/"); }}>Logout</Button>
+            </div>
           ) : (
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>Login</Button>
@@ -114,13 +117,13 @@ export default function Navbar() {
 function getTranslations(code: string) {
   switch (code) {
     case "hi":
-      return { nav: { home: "होम", dashboard: "डैशबोर्ड", complaints: "शिक���यतें", map: "मानचित्र", volunteers: "स्वयंसेवक", emergency: "आपातकाल", feedback: "प्रतिपुष्टि" } };
+      return { nav: { home: "होम", dashboard: "डैशबोर्ड", complaints: "शिकायतें", map: "मानचित्र", volunteers: "स्वयंसेवक", emergency: "आपातकाल", feedback: "प्रतिपुष्टि" } };
     case "ta":
       return { nav: { home: "முகப்பு", dashboard: "டாஷ்போர்டு", complaints: "புகார்கள்", map: "வரைபடம்", volunteers: "தன்னார்வலர்கள்", emergency: "அவசரம்", feedback: "கருத்து" } };
     case "te":
       return { nav: { home: "హోం", dashboard: "డాష్‌బోర్డ్", complaints: "ఫిర్యాదులు", map: "మ్యాప్", volunteers: "స్వచ్ఛంద", emergency: "అత్యవసర", feedback: "అభిప్రాయం" } };
     case "bn":
-      return { nav: { home: "হোম", dashboard: "ড্যাশবোর্ড", complaints: "অভিযোগ", map: "মানচিত্র", volunteers: "স্বেচ্ছাসেবক", emergency: "জরুরি", feedback: "প্রতিক্রিয়া" } };
+      return { nav: { home: "হোম", dashboard: "ড্য���শবোর্ড", complaints: "অভিযোগ", map: "মানচিত্র", volunteers: "স্বেচ্ছাসেবক", emergency: "জরুরি", feedback: "প্রতিক্রিয়া" } };
     case "mr":
       return { nav: { home: "मुख्य", dashboard: "डॅशबोर्ड", complaints: "तक्रारी", map: "नकाशा", volunteers: "स्वयंसेवक", emergency: "आपत्कालीन", feedback: "अभिप्राय" } };
     case "kn":
