@@ -32,14 +32,14 @@ const translations: Record<string, { tagline: string; sub: string; actions: stri
     actions: ["অভিযোগ জমা দিন", "স্ট্যাটাস ট্র্যাক করুন", "জরুরি সহায়তা", "স্বেচ্ছাসেবক নিবন্ধন"],
   },
   mr: {
-    tagline: "नागरिकांना जोडणे, शासन बदलणे",
+    tagline: "नागरिकांना जो��णे, शासन बदलणे",
     sub: "समस्या नोंदवा, प्रगती ट्रॅक करा आणि आपल्या शहरासोबत सहकार्य करा.",
     actions: ["तक्रार नोंदवा", "स्थिती ट्रॅक करा", "आपत्कालीन मदत", "स्वयंसेवक नोंदणी"],
   },
   kn: {
     tagline: "ನಾಗರಿಕರನ್ನು ಸಂಪರ್ಕಿಸಿ, ಆಡಳಿತ ಪರಿವರ್ತನೆ",
     sub: "ಸಮಸ್ಯೆಗಳನ್ನು ವರದಿ ಮಾಡಿ, ಪ್ರಗತಿಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ನಗರೊಂದಿಗೆ ಸಹಕರಿಸಿ.",
-    actions: ["ದೂರು ಸಲ್ಲಿಸಿ", "ಸ್ಥಿತಿ ಟ್ರ್ಯಾಕ್", "ತುರ್��ು ಸಹಾಯ", "ಸೇವಕರ ನೋಂದಣಿ"],
+    actions: ["ದೂರು ಸಲ್ಲಿಸಿ", "ಸ್ಥಿತಿ ಟ್ರ್ಯಾಕ್", "ತುರ್ತು ಸಹಾಯ", "ಸೇವಕರ ನೋಂದಣಿ"],
   },
 };
 
@@ -116,7 +116,7 @@ export default function Index() {
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl">{t.sub}</p>
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {quickActions.map((a) => (
+            {(role === "admin" ? quickActions.filter((a)=>a.to !== "/volunteers") : quickActions).map((a) => (
               <a key={a.label} href={a.to} className={`group relative overflow-hidden rounded-xl p-4 bg-gradient-to-br ${a.color} text-white shadow-lg hover:shadow-xl transition-shadow` }>
                 <a.icon className="h-6 w-6 mb-2 drop-shadow" />
                 <div className="font-semibold">{a.label}</div>
