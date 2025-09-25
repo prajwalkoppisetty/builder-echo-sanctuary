@@ -13,6 +13,7 @@ import AuthPage from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import Complaints from "@/pages/Complaints";
 import MapPage from "@/pages/Map";
+import Placeholder from "@/pages/Placeholder";
 
 const queryClient = new QueryClient();
 
