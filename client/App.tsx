@@ -10,7 +10,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Navbar from "@/components/Navbar";
 import AuthPage from "@/pages/Login";
-import Placeholder from "@/pages/Placeholder";
+import Dashboard from "@/pages/Dashboard";
+import Complaints from "@/pages/Complaints";
+import MapPage from "@/pages/Map";
 
 const queryClient = new QueryClient();
 
@@ -24,9 +26,9 @@ const App = () => (
         <main>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<Placeholder />} />
-            <Route path="/complaints" element={<Placeholder />} />
-            <Route path="/map" element={<Placeholder />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/complaints" element={<Complaints />} />
+            <Route path="/map" element={<MapPage />} />
             <Route path="/volunteers" element={<Placeholder />} />
             <Route path="/emergency" element={<Placeholder />} />
             <Route path="/feedback" element={<Placeholder />} />

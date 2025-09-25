@@ -23,7 +23,7 @@ const translations: Record<string, { tagline: string; sub: string; actions: stri
   te: {
     tagline: "పౌరులను కలుపుతూ, పాలనను మార్చడం",
     sub: "సమస్యలను నమోదు చేయండి, పురోగతిని ట్రాక్ చేయండి మరియు నగరంతో కలిసి పని చేయండి.",
-    actions: ["ఫిర్యాదు సమర్పించండి", "స్థితి ట్రా��్ చేయండి", "అత్యవసర సహాయం", "స్వచ్ఛందంగా చేరండి"],
+    actions: ["ఫిర్యాదు సమర్పించండి", "స్థితి ట్రాక్ చేయండి", "అత్యవసర సహాయం", "స్వచ్ఛందంగా చేరండి"],
   },
   bn: {
     tagline: "নাগরিকদের সংযুক্ত করা, শাসন ব্যবস্থার রূপান্তর",
@@ -36,7 +36,7 @@ const translations: Record<string, { tagline: string; sub: string; actions: stri
     actions: ["तक्रार नोंदवा", "स्थिती ट्रॅक करा", "आपत्कालीन मदत", "स्वयंसेवक नोंदणी"],
   },
   kn: {
-    tagline: "ನಾಗರಿಕರನ್ನು ಸಂಪರ್ಕಿಸಿ, ಆಡಳಿತ ಪರಿವರ್ತ���ೆ",
+    tagline: "ನಾಗರಿಕರನ್ನು ಸಂಪರ್ಕಿಸಿ, ಆಡಳಿತ ಪರಿವರ್ತನೆ",
     sub: "ಸಮಸ್ಯೆಗಳನ್ನು ವರದಿ ಮಾಡಿ, ಪ್ರಗತಿಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ನಗರೊಂದಿಗೆ ಸಹಕರಿಸಿ.",
     actions: ["ದೂರು ಸಲ್ಲಿಸಿ", "ಸ್ಥಿತಿ ಟ್ರ್ಯಾಕ್", "ತುರ್ತು ಸಹಾಯ", "ಸೇವಕರ ನೋಂದಣಿ"],
   },
@@ -98,56 +98,56 @@ export default function Index() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Floating icons */}
       <IconCloud />
 
       {/* Hero */}
       <section className="relative">
         <div className="absolute inset-0 -z-10 opacity-20" style={{ backgroundImage: "var(--flag-gradient)" }} />
-        <div className="container py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight" style={{ color: "hsl(var(--navy))" }}>
-              {t.tagline}
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground max-w-prose">{t.sub}</p>
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-4">
-              {quickActions.map((a) => (
-                <a key={a.label} href={a.to} className={`group relative overflow-hidden rounded-xl p-4 bg-gradient-to-br ${a.color} text-white shadow-lg hover:shadow-xl transition-shadow` }>
-                  <a.icon className="h-6 w-6 mb-2 drop-shadow" />
-                  <div className="font-semibold">{a.label}</div>
-                  <div className="absolute -right-6 -bottom-6 h-20 w-20 rounded-full bg-white/15 blur-xl group-hover:scale-110 transition-transform" />
-                </a>
-              ))}
-            </div>
-            <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
-              <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              Live systems operational • {exampleFromServer || "Secure API connected"}
-            </div>
+        <div className="container py-16 md:py-24">
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl" style={{ color: "hsl(var(--navy))" }}>
+            {t.tagline}
+          </h1>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl">{t.sub}</p>
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {quickActions.map((a) => (
+              <a key={a.label} href={a.to} className={`group relative overflow-hidden rounded-xl p-4 bg-gradient-to-br ${a.color} text-white shadow-lg hover:shadow-xl transition-shadow` }>
+                <a.icon className="h-6 w-6 mb-2 drop-shadow" />
+                <div className="font-semibold">{a.label}</div>
+                <div className="absolute -right-6 -bottom-6 h-20 w-20 rounded-full bg-white/15 blur-xl group-hover:scale-110 transition-transform" />
+              </a>
+            ))}
           </div>
-          <div className="relative">
-            <div className="absolute -inset-6 bg-gradient-to-br from-saffron/20 to-indiaGreen/20 blur-2xl rounded-3xl" />
-            <div className="relative overflow-hidden rounded-3xl border bg-card shadow-xl">
-              <div className="flex items-center justify-between px-4 py-3 border-b bg-muted/40">
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  Live Complaints Map
-                </div>
-                <div className="text-xs text-muted-foreground">OpenStreetMap</div>
-              </div>
-              <div className="aspect-[16/10] w-full">
-                <iframe
-                  title="OSM India"
-                  className="h-full w-full"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=67.5,6.5,97.5,37.5&layer=mapnik"
-                />
-              </div>
-              <div className="border-t p-3 overflow-hidden">
+          <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            Live systems operational • {exampleFromServer || "Secure API connected"}
+          </div>
+        </div>
+      </section>
+
+      {/* Map preview in its own section */}
+      <section className="container pb-4">
+        <div className="rounded-3xl overflow-hidden border bg-card shadow-xl">
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-muted/40">
+            <div className="flex items-center gap-2 text-sm">
+              <MapPin className="h-4 w-4 text-primary" />
+              Live Complaints Map
+            </div>
+            <a className="text-xs text-primary underline" href="/map">Open full map</a>
+          </div>
+          <div className="grid md:grid-cols-3">
+            <div className="md:col-span-2 aspect-[16/9] md:aspect-auto">
+              <iframe title="OSM India" className="h-full w-full" src="https://www.openstreetmap.org/export/embed.html?bbox=67.5,6.5,97.5,37.5&layer=mapnik" />
+            </div>
+            <div className="border-t md:border-t-0 md:border-l p-4 space-y-3">
+              <div className="text-sm font-semibold">Live Feed</div>
+              <div className="overflow-hidden">
                 <div className="whitespace-nowrap animate-marquee flex gap-8">
                   {liveComplaints.concat(liveComplaints).map((c, i) => (
                     <span key={c.id + "-" + i} className={`text-xs md:text-sm ${c.color}`}>• {c.text}</span>
                   ))}
                 </div>
               </div>
+              <div className="text-xs text-muted-foreground">Filters: Category • Region • Language</div>
             </div>
           </div>
         </div>
