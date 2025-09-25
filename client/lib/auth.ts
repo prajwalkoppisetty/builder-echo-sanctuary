@@ -9,6 +9,10 @@ export function fakeLogin({ email, phone, role = getRole(), region = getRegion()
 
 export function fakeLogout() {
   localStorage.removeItem("jwt");
+  localStorage.removeItem("role");
+  localStorage.removeItem("region");
+  window.dispatchEvent(new CustomEvent("role-change", { detail: "citizen" }));
+  window.dispatchEvent(new CustomEvent("region-change", { detail: "" }));
 }
 
 export function fakeSignup(payload: { email?: string; phone?: string; name?: string; role?: "citizen" | "officer" | "admin"; region?: string }) {
