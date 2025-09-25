@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Camera, FileVideo, MapPin, Navigation, Send, UploadCloud } from "lucide-react";
+import { getRole } from "@/lib/auth";
+
+const demoComplaints = [
+  { id: "AP-2025-0001", title: "Pothole near Benz Circle", category: "Roads", ward: "Vijayawada - Ward 12", submittedBy: "citizen.ap01", status: "Open", slaHrs: 48, createdAt: "2025-01-08 10:15" },
+  { id: "AP-2025-0002", title: "Water leakage at Dwarakanagar", category: "Water", ward: "Visakhapatnam - Ward 8", submittedBy: "citizen.ap02", status: "Assigned", slaHrs: 24, createdAt: "2025-01-08 09:10" },
+  { id: "AP-2025-0003", title: "Streetlight not working, Brodipet", category: "Electricity", ward: "Guntur - Ward 4", submittedBy: "citizen.ap03", status: "In Progress", slaHrs: 36, createdAt: "2025-01-07 19:40" },
+  { id: "AP-2025-0004", title: "Garbage overflow, RTC Colony", category: "Waste", ward: "Tirupati - Ward 6", submittedBy: "citizen.ap04", status: "Resolved", slaHrs: 12, createdAt: "2025-01-07 08:25" },
+];
 
 export default function Complaints() {
+  const [role, setRole] = useState<"citizen" | "officer" | "admin">(() => getRole());
   const [step, setStep] = useState(1);
   const [category, setCategory] = useState("Roads");
   const [description, setDescription] = useState("");
