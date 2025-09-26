@@ -62,9 +62,9 @@ export default function AuthPage() {
         </div>
         <div className="px-6 pt-4">
           <div className="text-xs font-medium text-muted-foreground mb-2">Quick login (demo)</div>
-          <div className="grid sm:grid-cols-2 gap-2">
-            <Button type="button" variant="secondary" onClick={() => { setRole("admin"); setRegion("Andhra Pradesh"); fakeLogin({ email: "admin@ap.gov.in", role: "admin", region: "Andhra Pradesh" }); toast.success("Logged in as Admin - Andhra Pradesh"); navigate("/dashboard"); }}>Login as Admin (Andhra Pradesh)</Button>
-            <Button type="button" onClick={() => { setRole("citizen"); setRegion("Andhra Pradesh"); fakeLogin({ email: "citizen@ap.in", role: "citizen", region: "Andhra Pradesh" }); toast.success("Logged in as Citizen - Andhra Pradesh"); navigate("/dashboard"); }}>Login as Citizen (Andhra Pradesh)</Button>
+          <div className="flex flex-wrap justify-center gap-2">
+            <Button type="button" variant="secondary" className="w-full sm:w-auto text-wrap" onClick={() => { setRole("admin"); setRegion("Andhra Pradesh"); fakeLogin({ email: "admin@ap.gov.in", role: "admin", region: "Andhra Pradesh" }); toast.success("Logged in as Admin - Andhra Pradesh"); navigate("/dashboard"); }}>Login as Admin (Andhra Pradesh)</Button>
+            <Button type="button" className="w-full sm:w-auto text-wrap" onClick={() => { setRole("citizen"); setRegion("Andhra Pradesh"); fakeLogin({ email: "citizen@ap.in", role: "citizen", region: "Andhra Pradesh" }); toast.success("Logged in as Citizen - Andhra Pradesh"); navigate("/dashboard"); }}>Login as Citizen (Andhra Pradesh)</Button>
           </div>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-4">

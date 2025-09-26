@@ -10,3 +10,11 @@
 export interface DemoResponse {
   message: string;
 }
+
+export interface GeminiChatRequest {
+  message: string;
+}
+
+export interface GeminiChatResponse {
+  response: string;
+}

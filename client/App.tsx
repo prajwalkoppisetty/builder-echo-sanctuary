@@ -17,6 +17,7 @@ import Volunteers from "@/pages/Volunteers";
 import Emergency from "@/pages/Emergency";
 import Feedback from "@/pages/Feedback";
 import Placeholder from "@/pages/Placeholder";
+import CitizenAssistance from "@/pages/CitizenAssistance";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/login" element={<AuthPage />} />
             <Route path="/signup" element={<AuthPage />} />
+            <Route path="/citizen-assistance" element={<CitizenAssistance />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

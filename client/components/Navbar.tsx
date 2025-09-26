@@ -43,6 +43,7 @@ export default function Navbar() {
     ...(role === "admin" ? [] : [{ to: "/volunteers", label: t.nav.volunteers }]),
     { to: "/emergency", label: t.nav.emergency },
     { to: "/feedback", label: t.nav.feedback },
+    { to: "/citizen-assistance", label: t.nav.citizenAssistance },
   ];
 
   return (
@@ -117,18 +118,18 @@ export default function Navbar() {
 function getTranslations(code: string) {
   switch (code) {
     case "hi":
-      return { nav: { home: "होम", dashboard: "डैशबोर्ड", complaints: "शिकायतें", map: "मानचित्र", volunteers: "स्वयंसेवक", emergency: "आपातकाल", feedback: "प्रतिपुष्टि" } };
+      return { nav: { home: "होम", dashboard: "डैशबोर्ड", complaints: "शिकायतें", map: "मानचित्र", volunteers: "स्वयंसेवक", emergency: "आपातकाल", feedback: "प्रतिपुष्टि", citizenAssistance: "नागरिक सहायता एआई बॉट" } };
     case "ta":
-      return { nav: { home: "முகப்பு", dashboard: "டாஷ்போர்டு", complaints: "புகார்கள்", map: "வரைபடம்", volunteers: "தன்னார்வலர்கள்", emergency: "அவசரம்", feedback: "கருத்து" } };
+      return { nav: { home: "முகப்பு", dashboard: "டாஷ்போர்டு", complaints: "புகார்கள்", map: "வரைபடம்", volunteers: "தன்னார்வலர்கள்", emergency: "அவசரம்", feedback: "கருத்து", citizenAssistance: "குடிமக்கள் உதவி AI போட்" } };
     case "te":
-      return { nav: { home: "హోం", dashboard: "డాష్‌బోర్డ్", complaints: "ఫిర్యాదులు", map: "మ్యాప్", volunteers: "స్వచ్ఛంద", emergency: "అత్యవసర", feedback: "అభిప్రాయం" } };
+      return { nav: { home: "హోం", dashboard: "డాష్‌బోర్డ్", complaints: "ఫిర్యాదులు", map: "మ్యాప్", volunteers: "స్వచ్ఛంద", emergency: "అత్యవసర", feedback: "అభిప్రాయం", citizenAssistance: "పౌర సహాయ AI బాట్" } };
     case "bn":
-      return { nav: { home: "হোম", dashboard: "ড্য���শবোর্ড", complaints: "অভিযোগ", map: "মানচিত্র", volunteers: "স্বেচ্ছাসেবক", emergency: "জরুরি", feedback: "প্রতিক্রিয়া" } };
+      return { nav: { home: "হোম", dashboard: "ড্যাশবোর্ড", complaints: "অভিযোগ", map: "মানচিত্র", volunteers: "স্বেচ্ছাসেবক", emergency: "জরুরি", feedback: "প্রতিক্রিয়া", citizenAssistance: "নাগরিক সহায়তা এআই বট" } };
     case "mr":
-      return { nav: { home: "मुख्य", dashboard: "डॅशबोर्ड", complaints: "तक्रारी", map: "नकाशा", volunteers: "स्वयंसेवक", emergency: "आपत्कालीन", feedback: "अभिप्राय" } };
+      return { nav: { home: "मुख्य", dashboard: "डॅशबोर्ड", complaints: "तक्रारी", map: "नकाशा", volunteers: "स्वयंसेवक", emergency: "आपत्कालीन", feedback: "अभिप्राय", citizenAssistance: "नागरिक सहाय्य AI बॉट" } };
     case "kn":
-      return { nav: { home: "ಮುಖಪುಟ", dashboard: "ಡ್ಯಾಶ್ಬೋರ್ಡ್", complaints: "ದೂರುಗಳು", map: "ನಕ್ಷೆ", volunteers: "ಸೇವಕರು", emergency: "ತುರ್ತು", feedback: "ಪ್ರತಿಕ್ರಿಯೆ" } };
+      return { nav: { home: "ಮುಖಪುಟ", dashboard: "ಡ್ಯಾಶ್ಬೋರ್ಡ್", complaints: "ದೂರುಗಳು", map: "ನಕ್ಷೆ", volunteers: "ಸೇವಕರು", emergency: "ತುರ್ತು", feedback: "ಪ್ರತಿಕ್ರಿಯೆ", citizenAssistance: "ನಾಗರಿಕ ಸಹಾಯ AI ಬೋಟ್" } };
     default:
-      return { nav: { home: "Home", dashboard: "Dashboard", complaints: "Complaints", map: "Map", volunteers: "Volunteers", emergency: "Emergency", feedback: "Feedback" } };
+      return { nav: { home: "Home", dashboard: "Dashboard", complaints: "Complaints", map: "Map", volunteers: "Volunteers", emergency: "Emergency", feedback: "Feedback", citizenAssistance: "Citizen Assistance AI Bot" } };
   }
 }
