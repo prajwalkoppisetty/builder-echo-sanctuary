@@ -44,6 +44,7 @@ export default function Navbar() {
     { to: "/emergency", label: t.nav.emergency },
     { to: "/feedback", label: t.nav.feedback },
     { to: "/citizen-assistance", label: t.nav.citizenAssistance },
+    
   ];
 
   return (

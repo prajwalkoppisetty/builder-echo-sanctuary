@@ -18,6 +18,7 @@ import Emergency from "@/pages/Emergency";
 import Feedback from "@/pages/Feedback";
 import Placeholder from "@/pages/Placeholder";
 import CitizenAssistance from "@/pages/CitizenAssistance";
+import ExifReader from "./pages/Geo_tag";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/login" element={<AuthPage />} />
             <Route path="/signup" element={<AuthPage />} />
             <Route path="/citizen-assistance" element={<CitizenAssistance />} />
+            <Route path="/geo-tag" element={<ExifReader />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
