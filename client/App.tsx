@@ -13,6 +13,9 @@ import AuthPage from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import Complaints from "@/pages/Complaints";
 import MapPage from "@/pages/Map";
+import Volunteers from "@/pages/Volunteers";
+import Emergency from "@/pages/Emergency";
+import Feedback from "@/pages/Feedback";
 import Placeholder from "@/pages/Placeholder";
 
 const queryClient = new QueryClient();
@@ -30,9 +33,9 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/complaints" element={<Complaints />} />
             <Route path="/map" element={<MapPage />} />
-            <Route path="/volunteers" element={<Placeholder />} />
-            <Route path="/emergency" element={<Placeholder />} />
-            <Route path="/feedback" element={<Placeholder />} />
+            <Route path="/volunteers" element={<Volunteers />} />
+            <Route path="/emergency" element={<Emergency />} />
+            <Route path="/feedback" element={<Feedback />} />
             <Route path="/login" element={<AuthPage />} />
             <Route path="/signup" element={<AuthPage />} />
             <Route path="*" element={<NotFound />} />
